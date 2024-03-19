@@ -6,5 +6,5 @@ Tecnologie cloud e mobile, corso dell'unibg, anno accademico: 2023-2024
 - QuizTEDdiamo: In base ai video crea delle flashcard e dei quiz divertenti a punti con un sistema di ranking degli utenti.
 - altri servizi 
 
-Giacomo Buscaglia 1078804
+Giacomo Buscaglia 1078804<br>
 Marco Zanda 1080427
