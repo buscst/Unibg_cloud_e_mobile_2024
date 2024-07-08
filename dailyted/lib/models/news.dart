@@ -1,16 +1,14 @@
-class Talk {
+class News {
+  final String id;
+  final String articleId;
   final String title;
-  final String description;
-  final String link;
-  final String url;
   final String pubDate;
-  final String source_icon;
+  final String sourceIcon;
 
-  Talk.fromJSON(Map<String, dynamic> jsonMap) :
+  News.fromJSON(Map<String, dynamic> jsonMap) :
+    id = jsonMap['_id'],
+    articleId = jsonMap['article_id'],
     title = jsonMap['title'],
-    description = jsonMap['description'],
-    link = (jsonMap['link'] ?? ""),
-    url = (jsonMap['url'] ?? ""),
-    pubDate = (jsonMap['pubDate'] ?? ""),
-    source_icon = (jsonMap['pubDate'] ?? "");
+    pubDate = jsonMap['pubDate'] ?? "",
+    sourceIcon = jsonMap['source_icon'] ?? "";
 }
