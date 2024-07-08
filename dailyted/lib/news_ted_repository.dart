@@ -18,7 +18,7 @@ Future<List<NewsTed>> getNewsTedByTag(String id) async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, Object>{
-      'id': id,
+      'article_id': id
     }),
   );
   if (response.statusCode == 200) {
