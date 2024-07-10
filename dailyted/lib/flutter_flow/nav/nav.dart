@@ -46,18 +46,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Homepage',
           path: '/homepage',
-          builder: (context, params) => HomepageWidget(
-            news: params.getParam<String>(
-              'news',
-              ParamType.String,
-              isList: true,
-            ),
-          ),
+          builder: (context, params) => HomepageWidget(),
+           // homepage: params.getParam<String>(
+            //  'homepage',
+           //   ParamType.String,
+            //  isList: true,
+           // ),
+          //),
         ),
         FFRoute(
           name: 'NewsPage',
           path: '/newsPage',
-          builder: (context, params) => NewsPageWidget(),
+          builder: (context, params) => NewsPageWidget(newsId: '0'),
         ),
         FFRoute(
           name: 'Tedxpage',
