@@ -10,9 +10,12 @@ Future<NewsTed> getNewsTed(String id) async {
     },
   );
   if (response.statusCode == 200) {
-    return  NewsTed.fromJSON(json.decode(response.body));
-  
+    print(response.body);
+    NewsTed res=NewsTed.fromJSON(json.decode(response.body));
+    print(res.talks.length);
+    return  res;
   } else {
+    print("prova");
     throw Exception('Failed to load talks');
   }
       
