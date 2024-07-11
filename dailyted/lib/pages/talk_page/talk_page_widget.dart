@@ -6,8 +6,8 @@ import '../../repository/news_repository.dart';
 import '../news_page/news_page_widget.dart';
 import '../../flutter_flow/nav/navbar.dart';
 
-class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({
+class TalkPageWidget extends StatefulWidget {
+  const TalkPageWidget({
     super.key,
     this.title = "DailyTed",
   });
@@ -15,10 +15,10 @@ class HomePageWidget extends StatefulWidget {
   final String title;
   
   @override
-  State<HomePageWidget> createState() => _HomePageWidgetState();
+  State<TalkPageWidget> createState() => _TalkPageWidgetState();
 }
 
-class _HomePageWidgetState extends State<HomePageWidget> {
+class _TalkPageWidgetState extends State<TalkPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -31,7 +31,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         key: scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.red,
           automaticallyImplyLeading: false,
           title: Text(
             'DailyTEDx',

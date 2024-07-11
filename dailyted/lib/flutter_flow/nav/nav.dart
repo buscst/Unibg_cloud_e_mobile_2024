@@ -25,33 +25,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => HomepageWidget(),
+      errorBuilder: (context, state) => HomePageWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => HomepageWidget(),
+          builder: (context, _) => HomePageWidget(),
         ),
         FFRoute(
           name: 'Homepage',
-          path: '/homepage',
-          builder: (context, params) => HomepageWidget(),
-           // homepage: params.getParam<String>(
-            //  'homepage',
-           //   ParamType.String,
-            //  isList: true,
-           // ),
-          //),
-        ),
-        FFRoute(
-          name: 'NewsPage',
-          path: '/newsPage',
-          builder: (context, params) => NewsPageWidget(newsId: '0'),
-        ),
-        FFRoute(
-          name: 'Tedxpage',
-          path: '/tedxpage',
-          builder: (context, params) => TedxpageWidget(id: '0'),
+          path: '/home_page',
+          builder: (context, params) => HomePageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:math';
-import 'home_page_widget.dart' show HomePageWidget;
+import 'talk_page_widget.dart' show TalkPageWidget;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class HomepageModel extends FlutterFlowModel<HomePageWidget> {
+class TalkPageModel extends FlutterFlowModel<TalkPageWidget> {
   ///  Local state fields for this page.
 
   bool isShowFullList = true;
