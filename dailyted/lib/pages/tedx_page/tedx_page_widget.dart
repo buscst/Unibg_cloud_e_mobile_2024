@@ -1,120 +1,31 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, no_leading_underscores_for_local_identifiers, avoid_print
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:dailyted/models/talk.dart';
+import 'package:dailyted/repository/talk_repository.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-export 'news_page_model.dart';
-import '../../models/news_ted.dart';
-import '../../repository/news_ted_repository.dart';
-import '../tedx_page/tedx_page_widget.dart';
+export 'tedx_page_model.dart';
 
-class NewsPageWidget extends StatefulWidget {
-  final String newsId;
 
-  const NewsPageWidget({
+class TedxpageWidget extends StatefulWidget {
+  final String id;
+
+  const TedxpageWidget({
     Key? key,
-    required this.newsId,
+    required this.id,
   }) : super(key: key);
 
   @override
-  State<NewsPageWidget> createState() => _NewsPageWidgetState();
+  State<TedxpageWidget> createState() => _TedxpageWidgetState();
 }
 
-class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStateMixin {
-  late final String newsid = widget.newsId;
+class _TedxpageWidgetState extends State<TedxpageWidget> with TickerProviderStateMixin {
+  late final String id = widget.id;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = <String, AnimationInfo>{};
-
-  @override
-  void initState() {
-    super.initState();
-
-    animationsMap.addAll({
-      'textOnPageLoadAnimation1': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 100.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 100.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 100.0.ms,
-            duration: 600.0.ms,
-            begin: Offset(0.0, 170.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'textOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 100.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 100.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 100.0.ms,
-            duration: 600.0.ms,
-            begin: Offset(0.0, 170.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'listViewOnPageLoadAnimation1': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 150.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 150.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 150.0.ms,
-            duration: 600.0.ms,
-            begin: Offset(0.0, 170.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-      'listViewOnPageLoadAnimation2': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 150.ms),
-          FadeEffect(
-            curve: Curves.easeInOut,
-            delay: 150.0.ms,
-            duration: 600.0.ms,
-            begin: 0.0,
-            end: 1.0,
-          ),
-          MoveEffect(
-            curve: Curves.easeInOut,
-            delay: 150.0.ms,
-            duration: 600.0.ms,
-            begin: Offset(0.0, 170.0),
-            end: Offset(0.0, 0.0),
-          ),
-        ],
-      ),
-    });
-  }
 
   String _formatDuration(String durationInSecondsStr) {
       int? durationInSeconds = int.tryParse(durationInSecondsStr);
@@ -125,30 +36,30 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
       String minutes = (duration.inMinutes).toString().padLeft(2, '0');
       String seconds = (duration.inSeconds % 60).toString().padLeft(2, '0');
       return '$minutes:$seconds';
-    }   
+    } 
 
   @override
   Widget build(BuildContext context) {
-    Future<NewsTed> _news = getNewsTed(newsid);
+    Future<Talk> _talk = getTalksByID(id);
 
     return GestureDetector(
-      child: FutureBuilder<NewsTed>(
-        future: _news,
+      child: FutureBuilder<Talk>(
+        future: _talk,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
-            final newsTed = snapshot.data!;
-            print(newsTed.talks.length);
+            Talk talk = snapshot.data!;
+
             return Scaffold(
               key: scaffoldKey,
               backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(100.0),
                 child: AppBar(
-                  backgroundColor: FlutterFlowTheme.of(context).primary,
+                  backgroundColor: Colors.red, //
                   automaticallyImplyLeading: false,
                   actions: [],
                   flexibleSpace: FlexibleSpaceBar(
@@ -201,7 +112,7 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
                             child: Text(
-                              newsTed.title,
+                              talk.title,
                               style: FlutterFlowTheme.of(context)
                                   .headlineMedium
                                   .override(
@@ -210,8 +121,8 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
                                     fontSize: 22.0,
                                     letterSpacing: 0.0,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                             ),
                           ),
                         ],
@@ -236,6 +147,17 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(24.0, 20.0, 24.0, 0.0),
+                              child: Center(
+                                child: Image.network(
+                                  talk.urlimg,
+                                  width: double.infinity,
+                                  height: 200.0,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(24.0, 20.0, 0.0, 0.0),
                               child: Text(
                                 'Descrizione',
@@ -250,14 +172,35 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 24.0, 12.0),
                               child: Text(
-                                newsTed.description,
+                                talk.description,
                                 textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.of(context).labelMedium.override(
                                       fontFamily: 'Inter',
                                       letterSpacing: 0.0,
                                     ),
-                              ).animateOnPageLoad(
-                                animationsMap['textOnPageLoadAnimation1']!,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(24.0, 20.0, 0.0, 0.0),
+                              child: Text(
+                                'Speaker',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 24.0, 12.0),
+                              child: Text(
+                                talk.speakers,
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.of(context).labelMedium.override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
                               ),
                             ),
                             Padding(
@@ -273,9 +216,9 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 12.0),
+                              padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 24.0, 12.0),
                               child: Text(
-                                newsTed.link,
+                                talk.url,
                                 textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                       fontFamily: 'Inter',
@@ -285,19 +228,17 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 12.0),
+                              padding: EdgeInsetsDirectional.fromSTEB(24.0, 20.0, 0.0, 12.0),
                               child: Text(
-                                'Approfondisci',
+                                'Video Correlati',
                                 textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.of(context).labelMedium.override(
                                       fontFamily: 'Inter',
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
                                     ),
-                              ).animateOnPageLoad(
-                                animationsMap['textOnPageLoadAnimation2']!,
                               ),
-                            ),//----------------------------------------------------------
+                            ),
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 24.0),
                               child: ListView.builder(
@@ -305,12 +246,12 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
                                 primary: false,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
-                                itemCount: newsTed.talks.length,
+                                itemCount: talk.relatedTalks.length,
                                 itemBuilder: (context, talksIndex) {
-                                  final talksItem = newsTed.talks[talksIndex];
+                                  final talksItem = talk.relatedTalks[talksIndex];
                                   return Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 4.0),
-                                    child: GestureDetector(
+                                    child: InkWell(
                                       onTap: () {
                                         Navigator.push(
                                           context,
@@ -335,23 +276,14 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
                                           borderRadius: BorderRadius.circular(8.0),
                                         ),
                                         child: Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 16.0, 0.0),
+                                          padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 16.0, 8.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
-                                              ClipRRect(
-                                                borderRadius: BorderRadius.circular(8.0),
-                                                child: Image.network(
-                                                  talksItem.urlimg,
-                                                  width: 90.0,
-                                                  height: 90.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                                                  padding: EdgeInsetsDirectional.fromSTEB(0, 8.0, 0.0, 8.0),
                                                   child: Column(
                                                     mainAxisSize: MainAxisSize.max,
                                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -370,7 +302,7 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
                                                         ),
                                                       ),
                                                       Text(
-                                                        talksItem.mainSpeaker,
+                                                        talksItem.speakers,
                                                         style: FlutterFlowTheme.of(context).labelMedium.override(
                                                               fontFamily: 'Inter',
                                                               letterSpacing: 0.0,
@@ -381,25 +313,23 @@ class _NewsPageWidgetState extends State<NewsPageWidget> with TickerProviderStat
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 0.0, 0.0),
+                                                padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 4.0, 8.0),
                                                 child: Text(
-                                                  _formatDuration(talksItem.duration) + " m",
+                                                 _formatDuration(talksItem.duration)+" m",
                                                   textAlign: TextAlign.end,
                                                   style: FlutterFlowTheme.of(context).headlineSmall.override(
-                                                        fontFamily: 'Readex Pro',
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                                    fontFamily: 'Readex Pro',
+                                                    letterSpacing: 0.0,
+                                                  ),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        ),//-----------------------------
+                                        ),
                                       ),
                                     ),
                                   );
                                 },
-                              ).animateOnPageLoad(
-                                animationsMap['listViewOnPageLoadAnimation1']!,
                               ),
                             ),
                           ],

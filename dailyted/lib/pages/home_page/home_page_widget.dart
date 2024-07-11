@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import '../../models/news.dart';
@@ -46,10 +45,10 @@ class _HomepageWidgetState extends State<HomepageWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 10.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  'https://images.unsplash.com/photo-1447933601403-0c6688de566e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NTYyMDF8MHwxfHNlYXJjaHwzfHxjb2ZmZWV8ZW58MHx8fHwxNzE3MTg5NTYwfDA&ixlib=rb-4.0.3&q=80&w=1080',
-                  width: 71.0,
-                  height: 200.0,
+                child: Image.asset(
+                  'assets/images/dailyted_logo.png',  // Percorso relativo all'immagine nell'asset
+                  width: 60.0,
+                  height: 60.0,
                   fit: BoxFit.cover,
                   alignment: Alignment(0.0, 0.0),
                 ),

@@ -29,6 +29,25 @@ Future<List<Talk>> getTalksByTag(String tag, int page) async {
     return talks;
   } else {
     throw Exception('Failed to load talks');
+  } 
+}
+
+Future<Talk> getTalksByID(String id) async {
+  var url = Uri.parse('https://3gozd8z8uj.execute-api.us-east-1.amazonaws.com/default/Get_Talk_By_Id?_id='+id);
+
+  final http.Response response = await http.get(url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  );
+  if (response.statusCode == 200) {
+    Talk res=Talk.fromJSON(json.decode(response.body));
+    print(res.relatedTalks.length);
+    print(res.speakers);
+    print(res.description);
+    return  res;
+  } else {
+    throw Exception('Failed to load talks');
   }
       
 }

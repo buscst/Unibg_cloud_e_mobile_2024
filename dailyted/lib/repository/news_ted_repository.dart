@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../models/news_with_ted.dart';
+import '../models/news_ted.dart';
 
 Future<NewsTed> getNewsTed(String id) async {
   var url = Uri.parse("https://2a9917r8f0.execute-api.us-east-1.amazonaws.com/default/Get_All_News_With_Talks?article_id="+id);
@@ -9,14 +9,12 @@ Future<NewsTed> getNewsTed(String id) async {
       'Content-Type': 'application/json; charset=UTF-8',
     },
   );
-  if (response.statusCode == 200) {
-    print(response.body);
+  if (response.statusCode == 200) { 
     NewsTed res=NewsTed.fromJSON(json.decode(response.body));
     print(res.talks.length);
     return  res;
   } else {
-    print("prova");
-    throw Exception('Failed to load talks');
+    throw Exception('Failed to load NewsTalk');
   }
       
 }

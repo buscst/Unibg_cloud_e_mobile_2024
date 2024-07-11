@@ -1,4 +1,22 @@
-import 'talk.dart';
+class Talk {
+  final String id;
+  final String title;
+  final String details;
+  final String mainSpeaker;
+  final String url;
+  final String urlimg;
+  final String duration;
+
+
+  Talk.fromJSON(Map<String, dynamic> jsonMap) :
+    id= jsonMap['0']??"",
+    title = jsonMap['5']?? "",
+    details = jsonMap['7']?? "",
+    mainSpeaker = (jsonMap['4'] ?? ""),
+    url = (jsonMap['3'] ?? ""),
+    urlimg = jsonMap['1']?? "",
+    duration = jsonMap['8']?? "";
+}
 
 class NewsTed {
   final String id;
@@ -9,7 +27,7 @@ class NewsTed {
   final String pubDate;
   final String sourceId;
   final String sourceIcon;
-  final List<RelatedTalk> talks;
+  final List<Talk> talks;
 
 
   NewsTed.fromJSON(Map<String, dynamic> jsonMap) :
@@ -22,6 +40,6 @@ class NewsTed {
     sourceId = jsonMap['source_id'] ?? '',
     sourceIcon = jsonMap['source_icon'] ?? '',
     talks = (jsonMap['talks'] as List)
-          .map((talkJson) => RelatedTalk.fromJSON(talkJson))
+          .map((talkJson) => Talk.fromJSON(talkJson))
           .toList();
 }
