@@ -47,7 +47,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
-                  'assets/images/dailyted_logo.png',  // Percorso relativo all'immagine nell'asset
+                  'assets/images/dailyted_logo.png',
                   width: 60.0,
                   height: 60.0,
                   fit: BoxFit.cover,

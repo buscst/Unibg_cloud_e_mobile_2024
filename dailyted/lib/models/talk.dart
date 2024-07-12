@@ -6,7 +6,7 @@ class Talk {
   final String url;
   final String urlimg;
   final String duration;
-final List<RelatedTalk>? relatedTalks; // Cambiato per essere opzionale
+final List<RelatedTalk>? relatedTalks; 
 
   Talk.fromJSON(Map<String, dynamic> jsonMap)
       : id = jsonMap['_id'] ?? "",
@@ -20,7 +20,7 @@ final List<RelatedTalk>? relatedTalks; // Cambiato per essere opzionale
             ? (jsonMap['related_videos'] as List)
                 .map((talkJson) => RelatedTalk.fromJSON(talkJson))
                 .toList()
-            : null; // Controllo se related_videos è null
+            : null;
 }
 
 class RelatedTalk {
