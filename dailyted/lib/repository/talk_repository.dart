@@ -7,7 +7,6 @@ Future<List<Talk>> initEmptyList() async {
   Iterable list = json.decode("[]");
   var talks = list.map((model) => Talk.fromJSON(model)).toList();
   return talks;
-
 }
 
 Future<List<Talk>> getTalksByTag(String tag, int page) async {
@@ -42,7 +41,6 @@ Future<Talk> getTalksByID(String id) async {
   );
   if (response.statusCode == 200) {
     Talk res=Talk.fromJSON(json.decode(response.body));
-    print(res.relatedTalks.length);
     print(res.speakers);
     print(res.description);
     return  res;

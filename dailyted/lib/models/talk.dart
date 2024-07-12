@@ -6,19 +6,21 @@ class Talk {
   final String url;
   final String urlimg;
   final String duration;
-  final List<RelatedTalk> relatedTalks;
+final List<RelatedTalk>? relatedTalks; // Cambiato per essere opzionale
 
-  Talk.fromJSON(Map<String, dynamic> jsonMap) :
-    id = jsonMap['_id']?? "",
-    title = jsonMap['title']?? "",
-    description = jsonMap['description']?? "",
-    speakers = (jsonMap['speakers'])?? "",
-    url = (jsonMap['url'])?? "",
-    urlimg = jsonMap['url_image']?? "",
-    duration = jsonMap['duration']?? "",
-    relatedTalks = (jsonMap['related_videos'] as List)
-        .map((talkJson) => RelatedTalk.fromJSON(talkJson))
-        .toList();
+  Talk.fromJSON(Map<String, dynamic> jsonMap)
+      : id = jsonMap['_id'] ?? "",
+        title = jsonMap['title'] ?? "",
+        description = jsonMap['description'] ?? "",
+        speakers = jsonMap['speakers'] ?? "",
+        url = jsonMap['url'] ?? "",
+        urlimg = jsonMap['url_image'] ?? "",
+        duration = jsonMap['duration'] ?? "",
+        relatedTalks = (jsonMap['related_videos'] != null)
+            ? (jsonMap['related_videos'] as List)
+                .map((talkJson) => RelatedTalk.fromJSON(talkJson))
+                .toList()
+            : null; // Controllo se related_videos è null
 }
 
 class RelatedTalk {

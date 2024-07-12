@@ -246,9 +246,9 @@ class _TedxpageWidgetState extends State<TedxpageWidget> with TickerProviderStat
                                 primary: false,
                                 shrinkWrap: true,
                                 scrollDirection: Axis.vertical,
-                                itemCount: talk.relatedTalks.length,
+                                itemCount: talk.relatedTalks!.length,
                                 itemBuilder: (context, talksIndex) {
-                                  final talksItem = talk.relatedTalks[talksIndex];
+                                  final talksItem = talk.relatedTalks![talksIndex];
                                   return Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(8.0, 4.0, 8.0, 4.0),
                                     child: InkWell(

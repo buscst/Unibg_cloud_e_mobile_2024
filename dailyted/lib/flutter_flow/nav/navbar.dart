@@ -37,7 +37,7 @@ class _NavBarState extends State<NavBar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.video_library),
-          label: 'Ted',
+          label: 'Talk',
         ),
       ],
       currentIndex: _selectedIndex,

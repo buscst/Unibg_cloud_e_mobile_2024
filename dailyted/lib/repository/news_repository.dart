@@ -2,14 +2,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../models/news.dart';
 
-Future<List<News>> initEmptyList() async {
-
-  Iterable list = json.decode("[]");
-  var news = list.map((model) => News.fromJSON(model)).toList();
-  return news;
-
-}
-
 Future<List<News>> getNews() async {
   var url = Uri.parse('https://ljk9b9je3f.execute-api.us-east-1.amazonaws.com/default/FetchNewsData');
 
